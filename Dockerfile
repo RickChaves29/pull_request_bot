@@ -11,7 +11,7 @@ COPY internal /app/internal
 COPY utils /app/utils
 COPY cmd /app/cmd
 
-RUN go build -o bot ./cmd/main.go
+RUN go build -o bot ./cmd/bot.go
 
 FROM alpine:3.17.2 AS prod
 
