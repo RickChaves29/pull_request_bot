@@ -6,12 +6,8 @@ import (
 	"time"
 )
 
-func FormatDate(location, date string) string {
-	loc, err := time.LoadLocation(location)
-	if err != nil {
-		log.Printf("LOG [error]: %v", err)
-	}
-	t, err := time.ParseInLocation(time.RFC3339, date, loc)
+func FormatDate(date string) string {
+	t, err := time.Parse(time.RFC3339, date)
 	if err != nil {
 		log.Printf("LOG [error]: %v", err)
 	}
