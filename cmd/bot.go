@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
@@ -51,6 +52,10 @@ func main() {
 			s.ChannelMessageSendEmbed(CHANNEL, &embad)
 		}
 	}
+  http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+    w.Write([]byte(`{"message": "bot is running"}`))
+  })
+  http.ListenAndServe(":3030", nil)
 	log.Printf("LOG [bot]: is runnig !")
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
