@@ -5,9 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/signal"
-	"syscall"
-
 	"github.com/RickChaves29/bot_pull_request/internal/data"
 	"github.com/RickChaves29/bot_pull_request/utils"
 	"github.com/bwmarrin/discordgo"
@@ -55,9 +52,6 @@ func main() {
   http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
     w.Write([]byte(`{"message": "bot is running"}`))
   })
+  log.Println("LOG [bot]: Bot is running")
   http.ListenAndServe(":3030", nil)
-	log.Printf("LOG [bot]: is runnig !")
-	sc := make(chan os.Signal, 1)
-	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
-	<-sc
 }
