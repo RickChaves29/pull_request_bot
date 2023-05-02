@@ -32,7 +32,6 @@ func main() {
 		embad := discordgo.MessageEmbed{
 			Title: "Não a Pull Requests pendentes Hoje",
 		}
-		s.ChannelMessageSend(CHANNEL, "@here")
 		s.ChannelMessageSendEmbed(CHANNEL, &embad)
 	} else {
 		for _, pull := range pullrequests {
