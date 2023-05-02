@@ -17,4 +17,5 @@ FROM alpine:3.17.2 AS prod
 
 WORKDIR /app
 COPY --from=build /app/bot /app/
+EXPOSE 3030
 CMD [ "./bot" ]
