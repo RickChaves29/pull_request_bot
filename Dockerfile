@@ -13,6 +13,4 @@ COPY cmd /app/cmd
 
 RUN go build -o bot ./cmd/bot.go
 
-EXPOSE 3030
-
 CMD [ "./bot" ]
