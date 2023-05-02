@@ -1,4 +1,4 @@
-FROM golang:1.20-alpine3.17 AS build
+FROM golang:1.20-alpine3.17
 
 WORKDIR /app
 
@@ -13,9 +13,6 @@ COPY cmd /app/cmd
 
 RUN go build -o bot ./cmd/bot.go
 
-FROM alpine:3.17.2 AS prod
-
-WORKDIR /app
-COPY --from=build /app/bot /app/
 EXPOSE 3030
+
 CMD [ "./bot" ]
