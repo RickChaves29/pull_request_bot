@@ -2,7 +2,6 @@ services:
   bot:
     build:
         context: ./
-        target: prod
     container_name: batata_bot
     env_file:
         - .env
