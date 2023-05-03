@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
@@ -35,25 +34,23 @@ func main() {
 		}
 		s.ChannelMessageSendEmbed(CHANNEL, &embad)
 	} else {
-		for _, pull := range pullrequests {
-			date := utils.FormatDate(pull.DatePR)
-			embad := discordgo.MessageEmbed{
-				Title: pull.Title,
-				Author: &discordgo.MessageEmbedAuthor{
-					Name:    pull.User.UserName,
-					IconURL: pull.User.UserAvatar,
-				},
-				Description: pull.State,
-				URL:         pull.Url,
-				Footer: &discordgo.MessageEmbedFooter{
-					Text: date,
-				},
-			}
-			s.ChannelMessageSendEmbed(CHANNEL, &embad)
+		date := utils.FormatDate(pullrequests[0].DatePR)
+		embad := discordgo.MessageEmbed{
+			Title: pullrequests[0].Title,
+			Author: &discordgo.MessageEmbedAuthor{
+				Name:    pullrequests[0].User.UserName,
+				IconURL: pullrequests[0].User.UserAvatar,
+			},
+			Description: pullrequests[0].State,
+			URL:         pullrequests[0].Url,
+			Footer: &discordgo.MessageEmbedFooter{
+				Text: date,
+			},
 		}
+		s.ChannelMessageSendEmbed(CHANNEL, &embad)
 	}
-  log.Println("LOG [bot]: Bot is running")
-  sc := make(chan os.Signal, 1)
+	log.Println("LOG [bot]: Bot is running")
+	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-sc
 }
